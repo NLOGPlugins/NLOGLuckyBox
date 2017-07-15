@@ -13,19 +13,19 @@ class Main extends PluginBase implements Listener{
 	
 	public $prefix;
 
- 	 public function onEnable(){
+ 	public function onEnable(){
  	 	
-    	$this->getServer()->getPluginManager()->registerEvents($this, $this);
-    	$this->getLogger()->notice("럭키박스 플러그인");
-    	$this->getLogger()->notice("Made by NLOG (nlog.kro.kr)");
-    	
-    	$this->prefix = "§l§f[ §cLuckyBox §f] §f";
-    	
-    	if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null) {
- 	 		$this->getLogger()->alert("EconomyAPI 플러그인이 존재하지 않습니다. 플러그인을 비활성화합니다.");
- 	 		$this->getPluginLoader()->disablePlugin($this);
- 	 	}
- 	 	
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		$this->getLogger()->notice("럭키박스 플러그인");
+		$this->getLogger()->notice("Made by NLOG (nlog.kro.kr)");
+
+		$this->prefix = "§l§f[ §cLuckyBox §f] §f";
+
+		if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null) {
+				$this->getLogger()->alert("EconomyAPI 플러그인이 존재하지 않습니다. 플러그인을 비활성화합니다.");
+				$this->getPluginLoader()->disablePlugin($this);
+		}
+
  	 }
  	 
  	 public function addItem ($player, $id, $count) {
