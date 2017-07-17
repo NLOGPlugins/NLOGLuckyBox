@@ -13,19 +13,19 @@ class Main extends PluginBase implements Listener{
 	
 	public $prefix;
 
- 	public function onEnable(){
+ 	 public function onEnable(){
  	 	
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getLogger()->notice("럭키박스 플러그인");
-		$this->getLogger()->notice("Made by NLOG (nlog.kro.kr)");
-
-		$this->prefix = "§l§f[ §cLuckyBox §f] §f";
-
-		if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null) {
-				$this->getLogger()->alert("EconomyAPI 플러그인이 존재하지 않습니다. 플러그인을 비활성화합니다.");
-				$this->getPluginLoader()->disablePlugin($this);
-		}
-
+    	$this->getServer()->getPluginManager()->registerEvents($this, $this);
+    	$this->getLogger()->notice("럭키박스 플러그인");
+    	$this->getLogger()->notice("Made by NLOG (nlog.kro.kr)");
+    	
+    	$this->prefix = "§l§f[ §cLuckyBox §f] §f";
+    	
+    	if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null) {
+ 	 		$this->getLogger()->alert("EconomyAPI 플러그인이 존재하지 않습니다. 플러그인을 비활성화합니다.");
+ 	 		$this->getPluginLoader()->disablePlugin($this);
+ 	 	}
+ 	 	
  	 }
  	 
  	 public function addItem ($player, $id, $count) {
@@ -138,74 +138,76 @@ class Main extends PluginBase implements Listener{
  	 			}
  	 		}
  	 		
- 	 		if ($item->getId() === 351) {
- 	 			/**
- 	 			 * 중급열쇠
- 	 			 * 꽝 30%
- 	 			 */
- 	 			$cancel = mt_rand(1, 10);
- 	 			
- 	 			if ($cancel > 7) {
- 	 				$player->sendMessage($prefix."중급 열쇠로 꽝에 당쳠되셨습니다.");
- 	 				self::removeItem($player->getName(), 351, 1);
- 	 				return;
- 	 			}else{
- 	 				
- 	 				$random = mt_rand(1, 7);
- 	 				
- 	 				if ($random === 1) {
- 	 					$money = mt_rand(10000, 50000);
- 	 					$player->sendMessage($prefix."§a".$money."§f원을 획득하였습니다.");
- 	 					EconomyAPI::getInstance()->addMoney($player->getName(), $money);
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					return;
- 	 				}
- 	 					
- 	 				if ($random === 2) {
- 	 					$player->sendMessage($prefix."§a스켈레톤 머리§f를 획득하였습니다.");
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					self::addItem($player->getName(), 397, 1);
- 	 					return;
- 	 				}
- 	 					
- 	 				if ($random === 3) {
- 	 					$count = mt_rand(5, 10);
- 	 					$player->sendMessage($prefix."§a네더의 별 §b{$count}§f개를 획득하였습니다.");
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					self::addItem($player->getName(), 399, $count);
- 	 					return;
- 	 				}
- 	 					
- 	 				if ($random === 4) {
- 	 					$count = mt_rand(5, 10);
- 	 					$player->sendMessage($prefix."§a하급열쇠 §b{$count}§f개를 획득하였습니다.");
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					self::addItem($player->getName(), 370, $count);
- 	 					return;
- 	 				}
- 	 					
- 	 				if ($random === 5) {
- 	 					$count = mt_rand(1, 5);
- 	 					$player->sendMessage($prefix."§a중급열쇠 §b{$count}§f개를 획득하였습니다.");
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					self::addItem($player->getName(), 351, $count);
- 	 					return;
- 	 				}
- 	 				
- 	 				if ($random === 6) {
- 	 					$count = mt_rand(3, 5);
- 	 					$player->sendMessage($prefix."§a거미 눈 §b{$count}§f개를 획득하였습니다.");
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					self::addItem($player->getName(), 375, $count);
- 	 					return;
- 	 				}
- 	 				
- 	 				if ($random === 7) {
- 	 					$count = mt_rand(1, 3);
- 	 					$player->sendMessage($prefix."§a상급열쇠 §b{$count}§f개를 획득하였습니다.");
- 	 					self::removeItem($player->getName(), 351, 1);
- 	 					self::addItem($player->getName(), 378, $count);
- 	 					return;
+ 	 		if ($item->getId() === 351){
+				if ($item->getDamage() === 0) {
+					/**
+					 * 중급열쇠
+					 * 꽝 30%
+					 */
+					$cancel = mt_rand(1, 10);
+					
+					if ($cancel > 7) {
+						$player->sendMessage($prefix."중급 열쇠로 꽝에 당쳠되셨습니다.");
+						self::removeItem($player->getName(), 351, 1);
+						return;
+					}else{
+						
+						$random = mt_rand(1, 7);
+						
+						if ($random === 1) {
+							$money = mt_rand(10000, 50000);
+							$player->sendMessage($prefix."§a".$money."§f원을 획득하였습니다.");
+							EconomyAPI::getInstance()->addMoney($player->getName(), $money);
+							self::removeItem($player->getName(), 351, 1);
+							return;
+						}
+							
+						if ($random === 2) {
+							$player->sendMessage($prefix."§a스켈레톤 머리§f를 획득하였습니다.");
+							self::removeItem($player->getName(), 351, 1);
+							self::addItem($player->getName(), 397, 1);
+							return;
+						}
+							
+						if ($random === 3) {
+							$count = mt_rand(5, 10);
+							$player->sendMessage($prefix."§a네더의 별 §b{$count}§f개를 획득하였습니다.");
+							self::removeItem($player->getName(), 351, 1);
+							self::addItem($player->getName(), 399, $count);
+							return;
+						}
+							
+						if ($random === 4) {
+							$count = mt_rand(5, 10);
+							$player->sendMessage($prefix."§a하급열쇠 §b{$count}§f개를 획득하였습니다.");
+							self::removeItem($player->getName(), 351, 1);
+							self::addItem($player->getName(), 370, $count);
+							return;
+						}
+							
+						if ($random === 5) {
+							$count = mt_rand(1, 5);
+							$player->sendMessage($prefix."§a중급열쇠 §b{$count}§f개를 획득하였습니다.");
+							self::removeItem($player->getName(), 351, 1);
+							self::addItem($player->getName(), 351, $count);
+							return;
+						}
+						
+						if ($random === 6) {
+							$count = mt_rand(3, 5);
+							$player->sendMessage($prefix."§a거미 눈 §b{$count}§f개를 획득하였습니다.");
+							self::removeItem($player->getName(), 351, 1);
+							self::addItem($player->getName(), 375, $count);
+							return;
+						}
+						
+						if ($random === 7) {
+							$count = mt_rand(1, 3);
+							$player->sendMessage($prefix."§a상급열쇠 §b{$count}§f개를 획득하였습니다.");
+							self::removeItem($player->getName(), 351, 1);
+							self::addItem($player->getName(), 378, $count);
+							return;
+						}
  	 				}
  	 			}
  	 		}
@@ -331,7 +333,9 @@ class Main extends PluginBase implements Listener{
  	 		$player->sendMessage($prefix."상자에 터치해주세요.");
  	 	}
  	 	if ($item->getId() === 351) {
- 	 		$player->sendMessage($prefix."상자에 터치해주세요.");
+			if ($item->getDamage() === 0) {
+				$player->sendMessage($prefix."상자에 터치해주세요.");
+			}
  	 	}
  	 	if ($item->getId() === 378) {
  	 		$player->sendMessage($prefix."상자에 터치해주세요.");
